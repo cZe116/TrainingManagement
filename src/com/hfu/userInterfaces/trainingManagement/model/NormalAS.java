@@ -46,6 +46,7 @@ public class NormalAS {
                 TrainingManagementHS.trainingManagement.login();
             }
             case 6 -> {
+                Clerk.save();
                 System.exit(0);
             }
             default -> {

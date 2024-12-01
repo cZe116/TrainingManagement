@@ -65,6 +65,7 @@ public class AdminAS extends NormalAS{
                 TrainingManagementHS.trainingManagement.login();
             }
             case 8 -> {
+                Clerk.save();
                 System.exit(0);
             }
             default -> {

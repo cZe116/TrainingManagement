@@ -9,8 +9,8 @@ public class TrainingManagementHS {
     public static void main(String[] args) {
         Training maths1 = new Training("Maths 1");
         Training commonBWL = new Training("Common business studies");
-        Training maths2 = new Training("Mathematik 2", maths1);
-        Training kostenRechnung = new Training("Kostenrechnung", maths2, commonBWL);
+        Training maths2 = new Training("Maths 2", maths1);
+        Training costCalc = new Training("CostCalculation", maths2, commonBWL);
         try{
             Clerk admin = new Clerk("Admin", "aaAA11&&aa", true);
             TrainingManagementHS trainingManagement = new TrainingManagementHS();
@@ -32,7 +32,6 @@ public class TrainingManagementHS {
         username = Entry.getAnswer("Username: ");
         password = Entry.getAnswer("Password: ");
         String answer = Entry.getAnswer("Want to login as admin ? (Y/N): ");
-        System.out.println(username + password + answer);
         if(username != null && !username.isEmpty() && password != null && !password.isEmpty() && answer != null && !answer.isEmpty()){
             if(answer.equalsIgnoreCase("Y")){
                 isAdmin = true;

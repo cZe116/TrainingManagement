@@ -80,7 +80,7 @@ public class NormalAS {
             System.out.println("An error occurred: " + e.getMessage());
             System.out.println("Entering options now!");
             System.out.println();
-            NormalAS normal = new NormalAS();
+            showMenu();
         }
     }
 

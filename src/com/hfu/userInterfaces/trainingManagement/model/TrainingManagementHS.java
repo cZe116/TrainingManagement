@@ -29,6 +29,7 @@ public class TrainingManagementHS {
     }
 
     public void login(){
+        Clerk.printAllClerkNames();
         System.out.println("Welcome to the training management.");
         System.out.println("Please login to a currently existing user:");
         username = Entry.getAnswer("Username: ");

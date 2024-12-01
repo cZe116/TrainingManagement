@@ -104,7 +104,7 @@ public class AdminAS extends NormalAS{
                 System.out.println("An error occurred: " + e.getMessage());
                 System.out.println("Entering options now!");
                 System.out.println();
-                NormalAS normal = new NormalAS();
+                showMenu();
             }
         } else if (editClerkAnswerAdmin.equalsIgnoreCase("N")) {
             try{
@@ -113,7 +113,7 @@ public class AdminAS extends NormalAS{
                 System.out.println("An error occurred: " + e.getMessage());
                 System.out.println("Entering options now!");
                 System.out.println();
-                NormalAS normal = new NormalAS();
+                showMenu();
             }
         }
     }
@@ -122,12 +122,12 @@ public class AdminAS extends NormalAS{
         try{
             EnterClerkK.generateClerk(username, password, isAdmin);
             System.out.println("Created clerk: " + username + " successfully!");
-            AdminAS admin = new AdminAS();
+            showMenu();
         }catch(Exception e){
             System.out.println("An error occurred: " + e.getMessage());
             System.out.println("Entering admin options now!");
             System.out.println();
-            AdminAS admin = new AdminAS();
+            showMenu();
         }
     }
 
@@ -135,12 +135,12 @@ public class AdminAS extends NormalAS{
         try{
             DeleteClerkK.deleteClerk(clerkName);
             System.out.println("Deleted clerk: " + clerkName + " successfully!");
-            AdminAS admin = new AdminAS();
+            showMenu();
         }catch(Exception e){
             System.out.println("An error occurred: " + e.getMessage());
             System.out.println("Entering admin options now!");
             System.out.println();
-            AdminAS admin = new AdminAS();
+            showMenu();
         }
     }
 }

@@ -30,7 +30,7 @@ public class LoginAAS {
             System.out.println("An error occurred: " + e.getMessage());
             System.out.println("Entering login now!");
             System.out.println();
-            TrainingManagementHS trainingManagement = new TrainingManagementHS();
+            TrainingManagementHS.trainingManagement.login();
 
         }
     }

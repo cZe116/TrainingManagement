@@ -37,7 +37,7 @@ public class Training implements Serializable {
     private String name;
     private Set<Training> dependencies = new LinkedHashSet<>();
 
-    Training(String name, Training... dependentTrainings) {
+    public Training(String name, Training... dependentTrainings) {
         this.name = name;
 
         for (Training f : dependentTrainings) {

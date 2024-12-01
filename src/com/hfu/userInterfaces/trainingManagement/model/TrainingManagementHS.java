@@ -6,14 +6,16 @@ import java.util.Scanner;
 
 public class TrainingManagementHS {
 
+    public static TrainingManagementHS trainingManagement;
+
+    public TrainingManagementHS() {
+    }
+
     public static void main(String[] args) {
-        Training maths1 = new Training("Maths 1");
-        Training commonBWL = new Training("Common business studies");
-        Training maths2 = new Training("Maths 2", maths1);
-        Training costCalc = new Training("CostCalculation", maths2, commonBWL);
         try{
-            Clerk admin = new Clerk("Admin", "aaAA11&&aa", true);
-            TrainingManagementHS trainingManagement = new TrainingManagementHS();
+            Clerk.read();
+            trainingManagement = new TrainingManagementHS();
+            trainingManagement.login();
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());
         }
@@ -26,8 +28,8 @@ public class TrainingManagementHS {
         LoginAAS login = new LoginAAS(username, password, isAdmin);
     }
 
-    public TrainingManagementHS(){
-        System.out.println("Welcome to the trainingmanagement.");
+    public void login(){
+        System.out.println("Welcome to the training management.");
         System.out.println("Please login to a currently existing user:");
         username = Entry.getAnswer("Username: ");
         password = Entry.getAnswer("Password: ");
@@ -46,11 +48,7 @@ public class TrainingManagementHS {
             System.out.println("Please retry after restart of program!");
             System.out.println();
 
-            TrainingManagementHS trainingManagementHS = new TrainingManagementHS();
+            trainingManagement.login();
         }
-
-
-
-
     }
 }

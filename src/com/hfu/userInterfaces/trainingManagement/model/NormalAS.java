@@ -42,7 +42,7 @@ public class NormalAS {
             }
             case 5 -> {
                 System.out.println("Logging out...");
-                TrainingManagementHS trainingManagement = new TrainingManagementHS();
+                TrainingManagementHS.trainingManagement.login();
             }
             default -> {
                 System.out.println("Invalid option! Please try again.");

@@ -20,10 +20,11 @@ public class LoginAAS {
             LoginK.passwordMatchesUsername(username, password);
             LoginK.privilegesMatchClerk(username, isAdmin);
             if(isAdmin){
-                System.out.println("DEBUG");
                 AdminAS admin = new AdminAS();
+                admin.showMenu();
             } else {
                 NormalAS normal = new NormalAS();
+                normal.showMenu();
             }
         } catch (Exception e) {
             System.out.println("An error occurred: " + e.getMessage());

@@ -31,8 +31,9 @@ public class TrainingManagementHS {
         System.out.println("Please login to a currently existing user:");
         username = Entry.getAnswer("Username: ");
         password = Entry.getAnswer("Password: ");
-        String answer = Entry.getAnswer("Want to login as admin ? (Y/N)");
-        if(username != null && password != null && answer != null){
+        String answer = Entry.getAnswer("Want to login as admin ? (Y/N): ");
+        System.out.println(username + password + answer);
+        if(username != null && !username.isEmpty() && password != null && !password.isEmpty() && answer != null && !answer.isEmpty()){
             if(answer.equalsIgnoreCase("Y")){
                 isAdmin = true;
             } else if (answer.equalsIgnoreCase("N")) {

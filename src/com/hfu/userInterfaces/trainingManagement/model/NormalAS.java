@@ -10,8 +10,7 @@ public class NormalAS {
 
     private Scanner scanner = new Scanner(System.in);
 
-    public NormalAS(){
-
+    public void showMenu() {
         System.out.println();
         System.out.println("Select from one of the following options: ");
         System.out.println("(1) Edit a clerk");
@@ -20,25 +19,36 @@ public class NormalAS {
         System.out.println("(4) Show assigned training");
         System.out.println("(5) Logout");
         int option = scanner.nextInt();
+        scanner.nextLine();
 
-        if(option == 1){
-            String clerkToBeEdited = Entry.getAnswer("Please enter the username of the clerk to edited: ");
-            editClerk(clerkToBeEdited);
-        } else if (option == 2) {
-            String clerkToAssignATraining = Entry.getAnswer("Please enter the username of the clerk to assign a training to: ");
-            String trainingNameToAssign = Entry.getAnswer("Please enter the name of the training to assign: ");
-            assignTraining(clerkToAssignATraining, trainingNameToAssign);
-        } else if (option == 3) {
-            String clerkToRemoveAssignment = Entry.getAnswer("Please enter the username of the clerk ro remove an assigned training from: ");
-            String trainingNameToRemove = Entry.getAnswer("Please enter the name of the training that is to be removed: ");
-            removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
-        } else if (option == 4) {
-            String clerkToShowAssignments = Entry.getAnswer("Please enter the username of the clerk to show the assigned trainings from: ");
-            showAssignedTraining(clerkToShowAssignments);
-        } else if (option == 5) {
-            TrainingManagementHS trainingManagement = new TrainingManagementHS();
+        switch (option) {
+            case 1 -> {
+                String clerkToBeEdited = Entry.getAnswer("Please enter the username of the clerk to be edited: ");
+                editClerk(clerkToBeEdited);
+            }
+            case 2 -> {
+                String clerkToAssignATraining = Entry.getAnswer("Please enter the username of the clerk to assign a training to: ");
+                String trainingNameToAssign = Entry.getAnswer("Please enter the name of the training to assign: ");
+                assignTraining(clerkToAssignATraining, trainingNameToAssign);
+            }
+            case 3 -> {
+                String clerkToRemoveAssignment = Entry.getAnswer("Please enter the username of the clerk to remove an assigned training from: ");
+                String trainingNameToRemove = Entry.getAnswer("Please enter the name of the training that is to be removed: ");
+                removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
+            }
+            case 4 -> {
+                String clerkToShowAssignments = Entry.getAnswer("Please enter the username of the clerk to show the assigned trainings from: ");
+                showAssignedTraining(clerkToShowAssignments);
+            }
+            case 5 -> {
+                System.out.println("Logging out...");
+                TrainingManagementHS trainingManagement = new TrainingManagementHS();
+            }
+            default -> {
+                System.out.println("Invalid option! Please try again.");
+                showMenu();
+            }
         }
-
     }
 
     public void editClerk(String username){
@@ -47,20 +57,16 @@ public class NormalAS {
 
         String newUserName = "", newPassword = "";
 
-        System.out.print("Want to change the username ? (Y/N): ");
-        String editClerkAnswerUserName = scanner.nextLine();
+        String editClerkAnswerUserName = Entry.getAnswer("Want to change the username ? (Y/N): ");
 
         if(editClerkAnswerUserName.equalsIgnoreCase("Y")){
-            System.out.print("Please enter the new username: ");
-            newUserName = scanner.nextLine();
+            newUserName = Entry.getAnswer("Please enter the new username: ");
         }
 
-        System.out.print("Want to change the password ? (Y/N): ");
-        String editClerkAnswerPassword = scanner.nextLine();
+        String editClerkAnswerPassword = Entry.getAnswer("Want to change the password ? (Y/N): ");
 
-        if(editClerkAnswerUserName.equalsIgnoreCase("Y")){
-            System.out.print("Please enter the new password: ");
-            newPassword = scanner.nextLine();
+        if(editClerkAnswerPassword.equalsIgnoreCase("Y")){
+            newPassword = Entry.getAnswer("Please enter the new password: ");
         }
 
         try{
@@ -77,18 +83,18 @@ public class NormalAS {
         Clerk clerkForAssignment = Clerk.get(username);
         System.out.println(Clerk.get(username).getUsername());
         Training trainingForAssignment = Training.get(trainingName);
-        clerkForAssignment.attendTraining(trainingForAssignment);
+        clerkForAssignment.assignTraining(trainingForAssignment);
     }
 
     public void removeAssignedTraining(String username, String trainingName){
         Clerk clerkForAssignment = Clerk.get(username);
         Training trainingForAssignment = Training.get(trainingName);
-        clerkForAssignment.removeAttendedTraining(trainingForAssignment);
+        clerkForAssignment.deleteAssignedTraining(trainingForAssignment);
     }
 
     public void showAssignedTraining(String username){
         Clerk clerkToShowAssignments = Clerk.get(username);
-        Collection<Training> assignments = clerkToShowAssignments.getAttendedTrainings();
+        Collection<Training> assignments = clerkToShowAssignments.getAssignedTrainings();
         for(Training assignment : assignments){
             System.out.println("Assigned to training : " + assignment.getName());
         }

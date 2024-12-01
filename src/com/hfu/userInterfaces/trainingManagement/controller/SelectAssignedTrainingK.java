@@ -15,7 +15,7 @@ public class SelectAssignedTrainingK {
 
     public String[] getAttendedTrainings(String username) {
         Clerk clerk = Clerk.get(username);
-        return convertToString(clerk.getAttendedTrainings()).toArray(new String[0]);
+        return convertToString(clerk.getAssignedTrainings()).toArray(new String[0]);
     }
 
     private Set<String> convertToString(Collection<Training> trainings) {

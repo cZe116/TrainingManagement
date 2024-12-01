@@ -8,13 +8,13 @@ public class AssignTrainingK {
     void attendTraining(String clerkName, String trainingName) {
         Training training = Training.get(trainingName);
         Clerk clerk = Clerk.get(clerkName);
-        clerk.attendTraining(training);
+        clerk.assignTraining(training);
     }
 
     void completeTraining(String clerkName, String trainingName) {
         Training training = Training.get(trainingName);
         Clerk clerk = Clerk.get(clerkName);
-        clerk.completeTraining(training);
+        clerk.passTraining(training);
     }
 
 }

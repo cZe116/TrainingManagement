@@ -3,6 +3,7 @@ package com.hfu.userInterfaces.trainingManagement.model;
 import com.hfu.userInterfaces.trainingManagement.controller.DeleteClerkK;
 import com.hfu.userInterfaces.trainingManagement.controller.EditClerkK;
 import com.hfu.userInterfaces.trainingManagement.controller.EnterClerkK;
+import com.hfu.userInterfaces.trainingManagement.util.Entry;
 
 import java.util.Scanner;
 
@@ -10,8 +11,7 @@ public class AdminAS extends NormalAS{
 
     private Scanner scanner = new Scanner(System.in);
 
-    public AdminAS(){
-
+    public void showMenu() {
         System.out.println();
         System.out.println("Select from one of the following options: ");
         System.out.println("(1) Edit a clerk");
@@ -22,50 +22,54 @@ public class AdminAS extends NormalAS{
         System.out.println("(6) Delete a clerk");
         System.out.println("(7) Logout");
         int option = scanner.nextInt();
+        scanner.nextLine();
 
-        if(option == 1){
-            System.out.print("Please enter the username of the clerk to edited: ");
-            String clerkToBeEdited = scanner.nextLine();
-            editClerk(clerkToBeEdited);
-        } else if (option == 2) {
-            System.out.print("Please enter the username of the clerk to assign a training to: ");
-            String clerkToAssignATraining = scanner.nextLine();
-            System.out.print("Please enter the name of the training to assign: ");
-            String trainingNameToAssign = scanner.nextLine();
-            assignTraining(clerkToAssignATraining, trainingNameToAssign);
-        } else if (option == 3) {
-            System.out.print("Please enter the username of the clerk ro remove an assigned training from: ");
-            String clerkToRemoveAssignment = scanner.nextLine();
-            System.out.print("Please enter the name of the training that is to be removed: ");
-            String trainingNameToRemove = scanner.nextLine();
-            removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
-        } else if (option == 4) {
-            System.out.print("Please enter the username of the clerk to show the assigned trainings from: ");
-            String clerkToShowAssignments = scanner.nextLine();
-            showAssignedTraining(clerkToShowAssignments);
-        } else if (option == 5) {
-            System.out.print("Please enter the username of the clerk that is to be created: ");
-            String usernameOfClerkToBeCreated = scanner.nextLine();
-            System.out.print("Please enter the password of the clerk that is to be created: ");
-            String passwordOfClerkToBeCreated = scanner.nextLine();
-            System.out.print("Please enter if the clerk that is to be created is an admin (Y/N): ");
-            String adminOptionOfClerkToBeCreated = scanner.nextLine();
-            boolean convertedAdminOption = false;
-            if(adminOptionOfClerkToBeCreated.equalsIgnoreCase("Y")){
-                convertedAdminOption = true;
-            } else if (adminOptionOfClerkToBeCreated.equalsIgnoreCase("N")) {
-                convertedAdminOption = false;
+        switch (option) {
+            case 1 -> {
+                String clerkToBeEdited = Entry.getAnswer("Please enter the username of the clerk to be edited: ");
+                editClerk(clerkToBeEdited);
             }
-            createClerk(usernameOfClerkToBeCreated, passwordOfClerkToBeCreated, convertedAdminOption);
-        } else if (option == 6) {
-            System.out.print("Please enter the username of the clerk to be deleted: ");
-            String clerkToBeDeleted = scanner.nextLine();
-            deleteClerk(clerkToBeDeleted);
-        } else if (option == 7) {
-            TrainingManagementHS trainingManagement = new TrainingManagementHS();
+            case 2 -> {
+                String clerkToAssignATraining = Entry.getAnswer("Please enter the username of the clerk to assign a training to: ");
+                String trainingNameToAssign = Entry.getAnswer("Please enter the name of the training to assign: ");
+                assignTraining(clerkToAssignATraining, trainingNameToAssign);
+            }
+            case 3 -> {
+                String clerkToRemoveAssignment = Entry.getAnswer("Please enter the username of the clerk to remove an assigned training from: ");
+                String trainingNameToRemove = Entry.getAnswer("Please enter the name of the training that is to be removed: ");
+                removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
+            }
+            case 4 -> {
+                String clerkToShowAssignments = Entry.getAnswer("Please enter the username of the clerk to show the assigned trainings from: ");
+                showAssignedTraining(clerkToShowAssignments);
+            }
+            case 5 -> {
+                String usernameOfClerkToBeCreated = Entry.getAnswer("Please enter the username of the clerk that is to be created: ");
+                String passwordOfClerkToBeCreated = Entry.getAnswer("Please enter the password of the clerk that is to be created: ");
+                String adminOptionOfClerkToBeCreated = Entry.getAnswer("Please enter if the clerk that is to be created is an admin (Y/N): ");
+                boolean convertedAdminOption = false;
+                if(adminOptionOfClerkToBeCreated.equalsIgnoreCase("Y")){
+                    convertedAdminOption = true;
+                } else if (adminOptionOfClerkToBeCreated.equalsIgnoreCase("N")) {
+                    convertedAdminOption = false;
+                }
+                createClerk(usernameOfClerkToBeCreated, passwordOfClerkToBeCreated, convertedAdminOption);
+            }
+            case 6 -> {
+                String clerkToBeDeleted = Entry.getAnswer("Please enter the username of the clerk to be deleted: ");
+                deleteClerk(clerkToBeDeleted);
+            }
+            case 7 -> {
+                System.out.println("Logging out...");
+                TrainingManagementHS trainingManagement = new TrainingManagementHS();
+            }
+            default -> {
+                System.out.println("Invalid option! Please try again.");
+                showMenu();
+            }
         }
-
     }
+
 
     @Override
     public void editClerk(String username){
@@ -74,24 +78,19 @@ public class AdminAS extends NormalAS{
 
         String newUserName = "", newPassword = "";
 
-        System.out.print("Want to change the username ? (Y/N): ");
-        String editClerkAnswerUserName = scanner.nextLine();
+        String editClerkAnswerUserName = Entry.getAnswer("Want to change the username ? (Y/N): ");
 
         if(editClerkAnswerUserName.equalsIgnoreCase("Y")){
-            System.out.print("Please enter the new username: ");
-            newUserName = scanner.nextLine();
+            newUserName = Entry.getAnswer("Please enter the new username: ");
         }
 
-        System.out.print("Want to change the password ? (Y/N): ");
-        String editClerkAnswerPassword = scanner.nextLine();
+        String editClerkAnswerPassword = Entry.getAnswer("Want to change the password ? (Y/N): ");
 
-        if(editClerkAnswerUserName.equalsIgnoreCase("Y")){
-            System.out.print("Please enter the new password: ");
-            newPassword = scanner.nextLine();
+        if(editClerkAnswerPassword.equalsIgnoreCase("Y")){
+            newPassword = Entry.getAnswer("Please enter the new password: ");
         }
 
-        System.out.print("Is the user to be considered an admin ? (Y/N): ");
-        String editClerkAnswerAdmin = scanner.nextLine();
+        String editClerkAnswerAdmin = Entry.getAnswer("Is the user to be considered an admin ? (Y/N): ");
 
         if(editClerkAnswerAdmin.equalsIgnoreCase("Y")){
             try{

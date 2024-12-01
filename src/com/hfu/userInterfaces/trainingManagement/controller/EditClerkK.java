@@ -6,11 +6,12 @@ import java.util.NoSuchElementException;
 public class EditClerkK {
     public static void editClerk(String oldName, String newName, String password, boolean isAdmin) {
         Clerk currentClerk = Clerk.theClerks.get(oldName);
+        System.out.println(currentClerk);
 
         if(currentClerk != null){
             currentClerk.setUsername(newName);
             currentClerk.setPassword(password);
-            currentClerk.setPermissions(isAdmin);
+            currentClerk.setAdmin(isAdmin);
 
             Clerk.theClerks.remove(oldName);
             Clerk.theClerks.put(newName, currentClerk);

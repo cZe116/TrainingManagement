@@ -1,35 +1,32 @@
 package com.hfu.userInterfaces.trainingManagement.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class Training {
-    private final String name;
-    private final Set<Training> requirements = new HashSet<>();
+public class Training implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     public static Map<String, Training> theTrainings = new HashMap<>();
 
-    public Training(String name) {
-        this.name = name;
-        theTrainings.put(name, this);
+    static Map<String, Training> getTrainings() {
+        return theTrainings;
     }
 
-    public Training(String name, Training... vorausgesetzteFortbildungen) {
-        this.name = name;
-
-        for (Training f : vorausgesetzteFortbildungen) {
-            requirements.add(f);
-        }
-
-        theTrainings.put(this.getName(), this);
+    static void setTheTrainings(Map<String, Training> trainings) {
+        theTrainings = trainings;
     }
 
-    public boolean isPrerequisiteOf(Training training) {
-        return training.getAllPrerequisites().contains(this);
+    static {
+        Training mathematik1 = new Training("Mathematik 1");
+        Training allgemeineBwl = new Training("Allgemeine BWL");
+        Training mathematik2 = new Training("Mathematik 2", mathematik1);
+        new Training("Kostenrechnung", mathematik2, allgemeineBwl);
     }
 
-    public static String[] giveAllNames() {
+    static String[] getAllTrainingNames() {
         return theTrainings.keySet().toArray(new String[0]);
     }
 
@@ -37,19 +34,30 @@ public class Training {
         return theTrainings.get(name);
     }
 
+    private String name;
+    private Set<Training> dependencies = new LinkedHashSet<>();
+
+    Training(String name, Training... dependentTrainings) {
+        this.name = name;
+
+        for (Training f : dependentTrainings) {
+            dependencies.add(f);
+        }
+
+        theTrainings.put(this.getName(), this);
+    }
+
     public String getName() {
-        return name;
+        return this.name;
     }
 
-    public void addPrerequisites(Training training) {
-        requirements.add(training);
+    public boolean isDependencyOf(Training fortbildung) {
+        return fortbildung.dependencies.contains(this);
     }
 
-    public void removePrerequisites(Training training) {
-        requirements.remove(training);
+    public Set<Training> getDependencies() {
+        return dependencies;
     }
 
-    public Set<Training> getAllPrerequisites() {
-        return requirements;
-    }
+
 }

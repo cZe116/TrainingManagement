@@ -9,7 +9,7 @@ public class Entry {
     public static String getAnswer(String question){
         Scanner scanner = new Scanner(System.in);
         System.out.print(question);
-        scanner.nextLine();
+        _answer = scanner.nextLine();
         return _answer;
     }
 

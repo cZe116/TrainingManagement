@@ -21,6 +21,7 @@ public class AdminAS extends NormalAS{
         System.out.println("(5) Create a clerk");
         System.out.println("(6) Delete a clerk");
         System.out.println("(7) Logout");
+        System.out.println("(8) Exit");
         int option = scanner.nextInt();
         scanner.nextLine();
 
@@ -62,6 +63,9 @@ public class AdminAS extends NormalAS{
             case 7 -> {
                 System.out.println("Logging out...");
                 TrainingManagementHS.trainingManagement.login();
+            }
+            case 8 -> {
+                System.exit(0);
             }
             default -> {
                 System.out.println("Invalid option! Please try again.");

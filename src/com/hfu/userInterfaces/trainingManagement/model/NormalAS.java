@@ -18,6 +18,7 @@ public class NormalAS {
         System.out.println("(3) Remove an assigned training");
         System.out.println("(4) Show assigned training");
         System.out.println("(5) Logout");
+        System.out.println("(6) Exit");
         int option = scanner.nextInt();
         scanner.nextLine();
 
@@ -43,6 +44,9 @@ public class NormalAS {
             case 5 -> {
                 System.out.println("Logging out...");
                 TrainingManagementHS.trainingManagement.login();
+            }
+            case 6 -> {
+                System.exit(0);
             }
             default -> {
                 System.out.println("Invalid option! Please try again.");

@@ -11,6 +11,7 @@ public class AdminAS extends NormalAS{
 
     private final Scanner scanner = new Scanner(System.in);
 
+    @Override
     public void showMenu() {
         System.out.println();
         System.out.println("Select from one of the following options: ");

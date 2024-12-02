@@ -2,8 +2,6 @@ package com.hfu.userInterfaces.trainingManagement.model;
 
 import com.hfu.userInterfaces.trainingManagement.util.Entry;
 
-import java.util.Scanner;
-
 public class TrainingManagementHS {
 
     public static TrainingManagementHS trainingManagement;

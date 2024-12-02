@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class NormalAS {
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public void showMenu() {
         System.out.println();
@@ -26,20 +26,24 @@ public class NormalAS {
             case 1 -> {
                 String clerkToBeEdited = Entry.getAnswer("Please enter the username of the clerk to be edited: ");
                 editClerk(clerkToBeEdited);
+                showMenu();
             }
             case 2 -> {
                 String clerkToAssignATraining = Entry.getAnswer("Please enter the username of the clerk to assign a training to: ");
                 String trainingNameToAssign = Entry.getAnswer("Please enter the name of the training to assign: ");
                 assignTraining(clerkToAssignATraining, trainingNameToAssign);
+                showMenu();
             }
             case 3 -> {
                 String clerkToRemoveAssignment = Entry.getAnswer("Please enter the username of the clerk to remove an assigned training from: ");
                 String trainingNameToRemove = Entry.getAnswer("Please enter the name of the training that is to be removed: ");
                 removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
+                showMenu();
             }
             case 4 -> {
                 String clerkToShowAssignments = Entry.getAnswer("Please enter the username of the clerk to show the assigned trainings from: ");
                 showAssignedTraining(clerkToShowAssignments);
+                showMenu();
             }
             case 5 -> {
                 System.out.println("Logging out...");

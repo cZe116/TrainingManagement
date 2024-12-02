@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class AdminAS extends NormalAS{
 
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public void showMenu() {
         System.out.println();
@@ -29,36 +29,41 @@ public class AdminAS extends NormalAS{
             case 1 -> {
                 String clerkToBeEdited = Entry.getAnswer("Please enter the username of the clerk to be edited: ");
                 editClerk(clerkToBeEdited);
+                showMenu();
             }
             case 2 -> {
                 String clerkToAssignATraining = Entry.getAnswer("Please enter the username of the clerk to assign a training to: ");
                 String trainingNameToAssign = Entry.getAnswer("Please enter the name of the training to assign: ");
                 assignTraining(clerkToAssignATraining, trainingNameToAssign);
+                showMenu();
             }
             case 3 -> {
                 String clerkToRemoveAssignment = Entry.getAnswer("Please enter the username of the clerk to remove an assigned training from: ");
                 String trainingNameToRemove = Entry.getAnswer("Please enter the name of the training that is to be removed: ");
                 removeAssignedTraining(clerkToRemoveAssignment, trainingNameToRemove);
+                showMenu();
             }
             case 4 -> {
                 String clerkToShowAssignments = Entry.getAnswer("Please enter the username of the clerk to show the assigned trainings from: ");
                 showAssignedTraining(clerkToShowAssignments);
+                showMenu();
             }
             case 5 -> {
                 String usernameOfClerkToBeCreated = Entry.getAnswer("Please enter the username of the clerk that is to be created: ");
                 String passwordOfClerkToBeCreated = Entry.getAnswer("Please enter the password of the clerk that is to be created: ");
                 String adminOptionOfClerkToBeCreated = Entry.getAnswer("Please enter if the clerk that is to be created is an admin (Y/N): ");
-                boolean convertedAdminOption = false;
                 if(adminOptionOfClerkToBeCreated.equalsIgnoreCase("Y")){
-                    convertedAdminOption = true;
+                    createClerk(usernameOfClerkToBeCreated, passwordOfClerkToBeCreated, true);
                 } else if (adminOptionOfClerkToBeCreated.equalsIgnoreCase("N")) {
-                    convertedAdminOption = false;
+                    createClerk(usernameOfClerkToBeCreated, passwordOfClerkToBeCreated, false);
                 }
-                createClerk(usernameOfClerkToBeCreated, passwordOfClerkToBeCreated, convertedAdminOption);
+
+                showMenu();
             }
             case 6 -> {
                 String clerkToBeDeleted = Entry.getAnswer("Please enter the username of the clerk to be deleted: ");
                 deleteClerk(clerkToBeDeleted);
+                showMenu();
             }
             case 7 -> {
                 System.out.println("Logging out...");

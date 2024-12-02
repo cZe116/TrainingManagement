@@ -1,13 +1,12 @@
 package com.hfu.userInterfaces.trainingManagement.model;
 
+import java.io.Serial;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Training implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
     public static Map<String, Training> theTrainings = new HashMap<>();
 
@@ -34,15 +33,13 @@ public class Training implements Serializable {
         return theTrainings.get(name);
     }
 
-    private String name;
-    private Set<Training> dependencies = new LinkedHashSet<>();
+    private final String name;
+    private final Set<Training> dependencies = new LinkedHashSet<>();
 
     public Training(String name, Training... dependentTrainings) {
         this.name = name;
 
-        for (Training f : dependentTrainings) {
-            dependencies.add(f);
-        }
+        dependencies.addAll(Arrays.asList(dependentTrainings));
 
         theTrainings.put(this.getName(), this);
     }
@@ -51,8 +48,8 @@ public class Training implements Serializable {
         return this.name;
     }
 
-    public boolean isDependencyOf(Training fortbildung) {
-        return fortbildung.dependencies.contains(this);
+    public boolean isDependencyOf(Training training) {
+        return training.dependencies.contains(this);
     }
 
     public Set<Training> getDependencies() {
